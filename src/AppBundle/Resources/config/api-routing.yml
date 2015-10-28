@@ -1,0 +1,8 @@
+projects:
+    type: rest
+    resource: "@AppBundle/Controller/ProjectController.php"
+
+subtasks:
+    type: rest
+    parent:   projects
+    resource: "@AppBundle/Controller/TaskController.php"

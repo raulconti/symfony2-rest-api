@@ -1,0 +1,53 @@
+services:
+    app_bundle.project_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - AppBundle\Entity\Project
+
+    app_bundle.project_handler:
+        class: AppBundle\Handler\ProjectHandler
+        arguments:
+            - @app_bundle.project_repository
+            - @app_bundle.form.handler.project_form_handler
+            - @security.token_storage
+
+    app_bundle.form.type.project:
+        class: AppBundle\Form\Type\ProjectType
+        tags:
+            - { name: form.type, alias: project_form }
+
+    app_bundle.form.handler.project_form_handler:
+        class: AppBundle\Form\Handler\FormHandler
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @form.factory
+            - @app_bundle.form.type.project
+
+
+
+    app_bundle.task_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - AppBundle\Entity\Task
+
+    app_bundle.task_handler:
+        class: AppBundle\Handler\TaskHandler
+        arguments:
+            - @app_bundle.task_repository
+            - @app_bundle.form.handler.task_form_handler
+
+    app_bundle.form.type.task:
+        class: AppBundle\Form\Type\TaskType
+        tags:
+            - { name: form.type, alias: task_form }
+
+    app_bundle.form.handler.task_form_handler:
+        class: AppBundle\Form\Handler\FormHandler
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @form.factory
+            - @app_bundle.form.type.task

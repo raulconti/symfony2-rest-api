@@ -1,0 +1,21 @@
+AppBundle\Entity\Task:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+        title:
+            expose: true
+        notes:
+            expose: true
+        status:
+            expose: true
+        due:
+            expose: true
+        completed:
+            expose: true
+        createdAt:
+            expose: true
+        modifiedAt:
+            expose: true
+        project:
+            expose: false

@@ -1,0 +1,11 @@
+AppBundle\Entity\Project:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+        title:
+            expose: true
+        createdAt:
+            expose: true
+        modifiedAt:
+            expose: true
