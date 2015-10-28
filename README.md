@@ -7,12 +7,12 @@ The API only returns JSON responses
 All API routes require authentication handled via OAuth2 with password grant type
 
 Bundles used:
-[FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle)
-[JMSSerializerBundle](https://github.com/schmittjoh/JMSSerializerBundle)
-[NelmioApiDocBundle](https://github.com/nelmio/NelmioApiDocBundle)
-[FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
-[FOSOAuthServerBundle](https://github.com/FriendsOfSymfony/FOSOAuthServerBundle)
-[NelmioCorsBundle](https://github.com/nelmio/NelmioCorsBundle)
+* [FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle)
+* [JMSSerializerBundle](https://github.com/schmittjoh/JMSSerializerBundle)
+* [NelmioApiDocBundle](https://github.com/nelmio/NelmioApiDocBundle)
+* [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
+* [FOSOAuthServerBundle](https://github.com/FriendsOfSymfony/FOSOAuthServerBundle)
+* [NelmioCorsBundle](https://github.com/nelmio/NelmioCorsBundle)
 
 
 Installation
