@@ -20,7 +20,10 @@ class TaskType extends AbstractType
             ->add('createdAt')
             ->add('modifiedAt')
             ->add('status')
-            ->add('due')
+            ->add('due', 'datetime', array(
+                'widget' => 'single_text',
+                'format' => 'yyyy/MM/dd',
+            ))
             ->add('completed')
             ->add('project')
         ;
