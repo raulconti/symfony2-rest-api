@@ -4,6 +4,7 @@ README
 Implementation a REST API secured with OAuth2. This simple project provides APIs to manage tasks
 
 The API only returns JSON responses
+
 All API routes require authentication handled via OAuth2 with password grant type
 
 Bundles used:
