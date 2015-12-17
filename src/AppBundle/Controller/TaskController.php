@@ -7,7 +7,6 @@ use AppBundle\Exception\InvalidFormException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -69,7 +68,7 @@ class TaskController extends FOSRestController
     public function getTasksAction(ParamFetcherInterface $paramFetcher, Project $project)
     {
         if ($project->getUser() != $this->getUser()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $limit = $paramFetcher->get('limit');
@@ -106,7 +105,7 @@ class TaskController extends FOSRestController
         }
 
         if ($project->getUser() != $this->getUser()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         try {
@@ -159,7 +158,7 @@ class TaskController extends FOSRestController
         }
 
         if ($project->getUser() != $this->getUser()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $task = $this->getHandler()->get($id, $project);
@@ -221,7 +220,7 @@ class TaskController extends FOSRestController
         }
 
         if ($project->getUser() != $this->getUser()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         try {
@@ -280,7 +279,7 @@ class TaskController extends FOSRestController
     protected function getOrError($id, Project $project)
     {
         if ($project->getUser() != $this->getUser()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $handler = $this->getHandler();

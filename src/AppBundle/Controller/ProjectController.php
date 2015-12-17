@@ -6,7 +6,6 @@ use AppBundle\Exception\InvalidFormException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -136,7 +135,7 @@ class ProjectController extends FOSRestController
         $project = $this->getHandler()->get($id);
 
         if ($project->getUser() != $this->getUser()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         try {
@@ -245,7 +244,7 @@ class ProjectController extends FOSRestController
         }
 
         if ($data->getUser() != $this->getUser()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         return $data;
