@@ -1,11 +1,11 @@
 README
 ======
 
-Implementation a REST API secured with OAuth2. This simple project provides APIs to manage tasks
+Implementation a REST API secured with OAuth2. This simple project provides APIs to manage projects with subtasks.
 
-The API only returns JSON responses
+The API only returns JSON responses.
 
-All API routes require authentication handled via OAuth2 with password grant type
+All API routes require authentication handled via OAuth2 with password grant type.
 
 Bundles used:
 * [FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle)
@@ -40,7 +40,9 @@ Installation
   ~~~
 
 * Create a client:
- See: https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/blob/master/Resources/doc/index.md#creating-a-client
+  ~~~bash
+  https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/blob/master/Resources/doc/index.md#creating-a-client
+  ~~~
 
 
 Usage
@@ -48,41 +50,49 @@ Usage
 First we have to request an access token:
 
 ~~~bash
-POST http://api.task/app.php/oauth/v2/token
-Body params:
-client_id=3_2dnysev5qmo0ws4go4g8k8kcg4cckg4og4c8kwosws0csk40ss
-client_secret=213yuoi2jzpc8g40k84g0cowwss0skscw8w80ssko4cc48g4ck
-grant_type=password
-password=123456
-username=raul
+curl -i -X POST "http://localhost/symfony2-rest-api/web/app_dev.php/oauth/v2/token" --data "client_id=3_2dnysev5qmo0ws4go4g8k8kcg4cckg4og4c8kwosws0csk40ss&client_secret=213yuoi2jzpc8g40k84g0cowwss0skscw8w80ssko4cc48g4ck&grant_type=password&password=123456&username=raul"
 
 {
-  "access_token": "MjgyODNkOGNiNDdkZGJjOTE5ZDNjZmNlODNlMzViNTA1MjkwNDM3NmFiMTQxYTEwNTljMDk2NWRmYzE3MDU1YQ",
-  "expires_in": 3600,
-  "token_type": "bearer",
-  "scope": null,
-  "refresh_token": "NWUxNjM3ODljZjNkOWQ0ZWYzY2JlYWYzOGZkMDU5MDEzMDk4OTcyNDZlNzk1ZGE0OTA1YTYyZTkwNzY3ZGFiMw"
+  "access_token":"MDZiMjY1OTVlMWQ5ODFiOGM1MjE3N2MzNmNmODk5YzA0ZGY5NTdkZDE3MzM1NDczMGZhZmZiZTJlZTUwNTJmYg",
+  "expires_in":3600,
+  "token_type":"bearer",
+  "scope":null,
+  "refresh_token":"OTI1MDczMGJmZDg0NGY3ZDA1MTQzMGZlZGQyZmUyMjIxMWEzMzE5ZGUwNGE3MjY4N2RiMTAzOWJkOTY4ZjkyOQ"
 }
 ~~~
-
 
 Now we can make calls to any API endpoint by sending the access token as a Bearer:
 
+**GET**
 ~~~bash
-GET http://localhost/task/web/app_dev.php/api/projects/1
-Authorization: Bearer MjgyODNkOGNiNDdkZGJjOTE5ZDNjZmNlODNlMzViNTA1MjkwNDM3NmFiMTQxYTEwNTljMDk2NWRmYzE3MDU1YQ
+curl -i -X GET "http://localhost/symfony2-rest-api/web/app_dev.php/api/projects/1" -H "Authorization: Bearer MDZiMjY1OTVlMWQ5ODFiOGM1MjE3N2MzNmNmODk5YzA0ZGY5NTdkZDE3MzM1NDczMGZhZmZiZTJlZTUwNTJmYg"
 
+HTTP/1.1 200 OK
 {
-  "id": 1,
-  "title": "First project",
-  "created_at": "2015-10-28T15:59:53+0100",
-  "modified_at": "2015-10-28T16:40:29+0100"
+  "id":1,
+  "title":"My first project",
+  "created_at":"2016-02-18T23:17:02+0100",
+  "modified_at":"2016-02-18T23:17:02+0100"
 }
 ~~~
 
+**POST**
+~~~bash
+curl -i -X POST "http://localhost/symfony2-rest-api/web/app_dev.php/api/projects" -H "Authorization: Bearer MDZiMjY1OTVlMWQ5ODFiOGM1MjE3N2MzNmNmODk5YzA0ZGY5NTdkZDE3MzM1NDczMGZhZmZiZTJlZTUwNTJmYg" --data "title=New Project"
+
+HTTP/1.1 201 Created
+~~~
+
+**PUT**
+~~~bash
+curl -i -X PUT "http://localhost/symfony2-rest-api/web/app_dev.php/api/projects/10" -H "Authorization: Bearer MDZiMjY1OTVlMWQ5ODFiOGM1MjE3N2MzNmNmODk5YzA0ZGY5NTdkZDE3MzM1NDczMGZhZmZiZTJlZTUwNTJmYg" --data "title=New Project updated"
+
+HTTP/1.1 204 No Content
+~~~
+
+
 
 At this point we can create a client (mobile app, AngularJs front-end..) that consumes our API
-
 
 The following is a list of the generated routes:
 ~~~bash
